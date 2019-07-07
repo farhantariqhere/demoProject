@@ -1,5 +1,5 @@
 {
-  "port": 3006,
+  "port": 4000,
   "firebaseConfig": {
     "apiKey": "AIzaSyBNV3WW-K5L90iDFeHkVEZwqROw5Q7FPag",
     "authDomain": "demoproject-a7bc0.firebaseapp.com",

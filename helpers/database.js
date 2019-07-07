@@ -14,7 +14,7 @@ connection.connect((err) => {
 
   }
 
-  cLog.success(`Connected to database ${dbConfig.host}:${dbConfig.port}/${dbConfig.database}`);
+  cLog.success(`Connected to database ${dbConfig.host}/${dbConfig.database}`);
 
 });
 
