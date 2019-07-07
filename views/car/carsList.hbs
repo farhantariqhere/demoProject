@@ -1,0 +1,37 @@
+<div class="container">
+    <a class="btn btn-success" href="/car/new">Create Car</a>
+
+    <a class="btn btn-link" href="/user/signout">Sign Out</a>
+
+    {{# if error}}
+
+        <div>
+            <p style="color: red">{{ error }}</p>
+        </div>
+
+    {{/if}}
+
+    <h2>List of cars</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Car Name</th>
+            <th>Car Color</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {{#each cars}}
+        <tr>
+            <td>{{ this.name }}</td>
+            <td>{{ this.color }}</td>
+            <td>
+                <a class="btn btn-info" href="/car/detail/{{this.id}}">Detail</a>
+                <a class="btn btn-primary" href="/car/edit/{{this.id}}">Edit</a>
+                <a class="btn btn-danger" href="/car/delete/{{this.id}}">Delete</a>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
+</div>
