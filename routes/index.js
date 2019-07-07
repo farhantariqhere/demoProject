@@ -12,6 +12,7 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({ secret: 'demoApp', saveUninitialized: false, resave: false }));
+app.use(express.static(path.join(__dirname, '../assets')));
 
 app.engine('hbs', hbs({
   extname: 'hbs',
