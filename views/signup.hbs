@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-lg-offset-4 signup-container">
+<div class="col-lg-4 col-lg-offset-4 form-container">
 
     {{# if error}}
 
@@ -16,20 +16,19 @@
             <label for="email">Email address:</label>
             <input type="email" class="form-control" id="email" name="email" onfocusout="validateEmail()">
             <p id="invalid-email" class="error">Please enter valid email address</p>
-            <p id="required" class="error">This field is required</p>
-
+            <p id="email-required" class="error">This field is required</p>
         </div>
 
         <div class="form-group">
 
             <label for="pwd">Password:</label>
             <input type="password" class="form-control" id="password" name="password" onfocusout="validatePassword()">
-            <p id="invalid-password" class="error">Password must be 8 characters long</p>
-            <p id="required" class="error">This field is required</p>
+            <p id="invalid-password" class="error">Password must be 6 characters long</p>
+            <p id="pass-required" class="error">This field is required</p>
 
         </div>
 
-        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <button type="submit" class="btn btn-primary" id="signup" onclick="validateSignup(event)">Sign Up</button>
 
     </form>
 
@@ -40,6 +39,12 @@
     var invalid_email = document.getElementById("invalid-email");
     var password = document.getElementById("password");
     var invalid_password = document.getElementById("invalid-password");
+    var email_required = document.getElementById("email-required");
+    var pass_required = document.getElementById("pass-required");
+    var email_flag = false;
+    var pass_flag = false;
+    var email_required_flag = false;
+    var pass_required_flag = false;
 
     function validateEmail() 
     {
@@ -47,33 +52,65 @@
         {
             console.log('email :', email.value)
             invalid_email.style.display = "none";
+            email_flag = true
             return (true)
         }
         invalid_email.style.display = "block";
+        email_flag = false
+        email_required.style.display = "none";
+        email_required_flag = false
         return (false)
     }
 
     function validatePassword() 
     {
         console.log('password :', password.value, password.value.length)
-        if (password.value.length < 8)
+        if (password.value.length < 6)
         {   console.log('length 9')
             invalid_password.style.display = "block";
-            return (true)
+            pass_flag = false
+            return (false)
         }
         invalid_password.style.display = "none";
-        return (false)
+        pass_flag = true
+        return (true)
+    }
+    function validateSignup(e) {
+        if (email.value.length == 0) {
+            email_required.style.display = "block";
+            email_required_flag = false;
+        }
+        else {
+            console.log('emails : ', email.value.length)
+            email_required_flag = true;
+            email_required.style.display = "none";
+        }
+        if (password.value.length == 0) {
+            pass_required.style.display = "block";
+            pass_required_flag = false;
+        }
+        else {
+            pass_required_flag = true;
+            pass_required.style.display = "none";
+        }
+        console.log(email_flag, pass_flag)
+        if ( email_flag == false || pass_flag == false ) {
+            e.preventDefault();
+        }
     }
 </script>
 
 <style rel="stylesheet" type="text/css" >
-    .signup-container {
+    .form-container {
         margin-top: 40px;
     }
     .error {
         color: red;
     }
-    #required {
+    #pass-required {
+        display: none;
+    }
+    #email-required {
         display: none;
     }
     #invalid-email {

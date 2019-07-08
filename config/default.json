@@ -24,7 +24,7 @@
   "database": {
     "host": "localhost",
     "user": "root",
-    "password": "P@ss1234",
+    "password": "abc123@.",
     "database": "demo"
   }
 }
