@@ -1,4 +1,4 @@
-<div class="col-lg-4 col-lg-offset-4 signup-div">
+<div class="col-lg-4 col-lg-offset-4 signup-container">
 
     {{# if error}}
 
@@ -14,14 +14,18 @@
         <div class="form-group">
 
             <label for="email">Email address:</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <input type="email" class="form-control" id="email" name="email" onfocusout="validateEmail()">
+            <p id="invalid-email" class="error">Please enter valid email address</p>
+            <p id="required" class="error">This field is required</p>
 
         </div>
 
         <div class="form-group">
 
             <label for="pwd">Password:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" onfocusout="validatePassword()">
+            <p id="invalid-password" class="error">Password must be 8 characters long</p>
+            <p id="required" class="error">This field is required</p>
 
         </div>
 
@@ -30,3 +34,52 @@
     </form>
 
 </div>
+
+<script>
+    var email = document.getElementById("email");
+    var invalid_email = document.getElementById("invalid-email");
+    var password = document.getElementById("password");
+    var invalid_password = document.getElementById("invalid-password");
+
+    function validateEmail() 
+    {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value))
+        {
+            console.log('email :', email.value)
+            invalid_email.style.display = "none";
+            return (true)
+        }
+        invalid_email.style.display = "block";
+        return (false)
+    }
+
+    function validatePassword() 
+    {
+        console.log('password :', password.value, password.value.length)
+        if (password.value.length < 8)
+        {   console.log('length 9')
+            invalid_password.style.display = "block";
+            return (true)
+        }
+        invalid_password.style.display = "none";
+        return (false)
+    }
+</script>
+
+<style rel="stylesheet" type="text/css" >
+    .signup-container {
+        margin-top: 40px;
+    }
+    .error {
+        color: red;
+    }
+    #required {
+        display: none;
+    }
+    #invalid-email {
+        display: none;
+    }
+    #invalid-password {
+        display: none;
+    }
+</style>
